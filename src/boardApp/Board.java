@@ -29,6 +29,7 @@ public class Board {
 
 	public List<String> Contribution() {
 		Boolean ctrbFlag = false;
+		String yes = "y";
 
 		List<String> contributions = new ArrayList<>();
 		Scanner scanner = new Scanner(System.in);
@@ -37,6 +38,12 @@ public class Board {
 			System.out.print("投稿内容 > ");
 			String input = scanner.nextLine();
 			contributions.add(input);
+			
+			System.out.print("投稿を続けますか?[y/n] ");
+			String ans = scanner.nextLine();
+			if (!ans.equals(yes)) {
+				ctrbFlag = true;
+			}
 		}
 		scanner.close();
 		return contributions;
