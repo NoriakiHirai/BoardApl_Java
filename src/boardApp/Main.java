@@ -8,6 +8,8 @@ import java.util.Scanner;
  * @author guest
  */
 public class Main {
+	
+	private static Scanner scanner; 
 	/**
 	 * 掲示板への投稿、およびその出力に関する処理の制御を行う。
 	 * 
@@ -20,7 +22,7 @@ public class Main {
 		// そのため、各メソッドでscannerオブジェクトを作成し、InputStreamの
 		// open/closeを行うのではなく、最初にscannerオブジェクトを作成し、
 		// それを引き回して、mainメソッドの最後にcloseさせる。
-		Scanner scanner = new Scanner(System.in);
+		scanner = new Scanner(System.in);
 
 		// ユーザー名を取得する
 		String userName = boardInit(scanner);
@@ -84,7 +86,7 @@ public class Main {
 	 * @param ctbList
 	 *            投稿情報オブジェクトの配列
 	 */
-	public static void createBoard(Contribution[] ctbList) {
+	private static void createBoard(Contribution[] ctbList) {
 		// タイトル部分の表示
 		System.out.println();
 		System.out.println("------------------------------");
