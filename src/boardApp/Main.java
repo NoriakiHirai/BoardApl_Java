@@ -1,28 +1,103 @@
 package boardApp;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
 
 /**
- * æ²ç¤ºæ¿ã¸ã®æŠ•ç¨¿(contribution)ã‚„æŠ•ç¨¿å†…å®¹ã®æ²ç¤ºæ¿ã¸ã®å‡ºåŠ›ã‚’å®Ÿè¡Œã™ã‚‹ã‚¯ãƒ©ã‚¹
+ * Œf¦”Â‚Ö‚Ì“Še(contribution)‚â“Še“à—e‚ÌŒf¦”Â‚Ö‚Ìo—Í‚ğÀs‚·‚éƒNƒ‰ƒX
  * 
  * @author guest
  */
 public class Main {
 	/**
-	 * æ²ç¤ºæ¿ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®ä½œæˆã€æ²ç¤ºæ¿ã¸ã®æŠ•ç¨¿ã€ãŠã‚ˆã³ãã®å‡ºåŠ›ã‚’è¡Œã†ã€‚
+	 * Œf¦”Â‚Ö‚Ì“ŠeA‚¨‚æ‚Ñ‚»‚Ìo—Í‚ÉŠÖ‚·‚éˆ—‚Ì§Œä‚ğs‚¤B
 	 * 
-	 * @param args å®Ÿè¡Œæ™‚å¼•æ•°ã€‚ç„¡è¦–ã•ã‚Œã‚‹ã€‚
+	 * @param args
+	 *            Àsˆø”B–³‹‚³‚ê‚éB
 	 */
-	public static void main (String[] args) {
-		// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®ä½œæˆ
-		Board myBoard = new Board("news", "user1");
-				
-		// æŠ•ç¨¿ã®å®Ÿæ–½
-		List<String> contributions = new ArrayList<>();
-		contributions = myBoard.contribution();
-		
-		// æŠ•ç¨¿å†…å®¹ã®å‡ºåŠ›		
-		myBoard.output(myBoard, contributions);
+	public static void main(String[] args) {
+		// ƒXƒLƒƒƒi[ƒIƒuƒWƒFƒNƒg‚Ì¶¬‚ğs‚¤B
+		// ˆê“xInputStream‚ğclose‚·‚é‚ÆAÄ“xopen‚·‚é‚Ì‚Í–³—‚Á‚Û‚¢B
+		// ‚»‚Ì‚½‚ßAŠeƒƒ\ƒbƒh‚ÅscannerƒIƒuƒWƒFƒNƒg‚ğì¬‚µAInputStream‚Ì
+		// open/close‚ğs‚¤‚Ì‚Å‚Í‚È‚­AÅ‰‚ÉscannerƒIƒuƒWƒFƒNƒg‚ğì¬‚µA
+		// ‚»‚ê‚ğˆø‚«‰ñ‚µ‚ÄAmainƒƒ\ƒbƒh‚ÌÅŒã‚Éclose‚³‚¹‚éB
+		Scanner scanner = new Scanner(System.in);
+
+		// ƒ†[ƒU[–¼‚ğæ“¾‚·‚é
+		String userName = boardInit(scanner);
+
+		// “Šeî•ñƒIƒuƒWƒFƒNƒg‚ğŠi”[‚·‚é”z—ñ
+		// “–‰Û‘è‚Å‚Í3Œ‚Ì‚İ“Še‚ğó‚¯•t‚¯‚é‚Ì‚ÅA”z—ñ‚Ì’·‚³‚Í3‚Æ‚·‚é
+		Contribution[] ctbList = new Contribution[3];
+
+		// “Šeˆ—(3Œ)
+		for (int i = 0; i < 3; i++) {
+			ctbList[i] = readInput(scanner, userName);
+		}
+		// Œf¦”Â¶¬ˆ—
+		createBoard(ctbList);
+
+		scanner.close();
+	}
+
+	/**
+	 * Œf¦”ÂƒAƒvƒŠ‚Ì‰Šúˆ—‚Æ‚µ‚ÄAƒ†[ƒU[‚Ì–¼‘O‚ğƒRƒ“ƒ\[ƒ‹‚©‚çæ“¾‚·‚é
+	 * 
+	 * @param sc
+	 *            ƒXƒLƒƒƒi[ƒIƒuƒWƒFƒNƒg
+	 * @return userName ƒ†[ƒU[–¼
+	 */
+	private static String boardInit(Scanner sc) {
+		System.out.println("*** ‘æ“ñ‰ñ‰Û‘èŒf¦”Â‚Ö‚æ‚¤‚±‚» ***");
+
+		// ƒ†[ƒU[–¼‚Ì“ü—Í
+		System.out.println("ƒ†[ƒU[–¼‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B");
+		System.out.print("ƒ†[ƒU[–¼:");
+		String userName = sc.nextLine();
+
+		return userName;
+	}
+
+	/**
+	 * Œf¦”Â‚Ö‚Ì“Še‚ğƒRƒ“ƒ\[ƒ‹‚©‚ç“ü—Í‚³‚¹‚é
+	 * 
+	 * @param sc
+	 *            ƒXƒLƒƒƒi[ƒIƒuƒWƒFƒNƒg
+	 * @param userName
+	 *            ƒ†[ƒU[–¼
+	 * @return contribution “Še“à—e‚ğ•Û‚µ‚½ƒIƒuƒWƒFƒNƒg
+	 */
+	private static Contribution readInput(Scanner sc, String userName) {
+		// “Še•¶‚Ì“ü—Í
+		System.out.println("“Še‚ğ‘‚«‚ñ‚Å‚­‚¾‚³‚¢B");
+		System.out.print("“Še“à—e > ");
+		 String sentence = sc.nextLine();
+
+		// “Šeî•ñƒCƒ“ƒXƒ^ƒ“ƒX‚Ì¶¬
+		Contribution contribution = new Contribution(userName, sentence);
+
+		return contribution;
+	}
+
+	/**
+	 * Œf¦”Â‚ğ¶¬‚µA“Še‚³‚ê‚½“à—e‚ğŒf¦”Â‚É•\¦‚·‚é
+	 * 
+	 * @param ctbList
+	 *            “Šeî•ñƒIƒuƒWƒFƒNƒg‚Ì”z—ñ
+	 */
+	public static void createBoard(Contribution[] ctbList) {
+		// ƒ^ƒCƒgƒ‹•”•ª‚Ì•\¦
+		System.out.println();
+		System.out.println("------------------------------");
+		System.out.println();
+		System.out.println("********************");
+		System.out.println("‘æ“ñ‰ñ‰Û‘è" + Contribution.TITLE);
+		System.out.println("********************");
+
+		// “Še“à—e•”•ª‚Ì•\¦
+		for (int i = 0; i < ctbList.length; i++) {
+			System.out.println((i + 1) + ". " + ctbList[i].getUserName());
+			System.out.println(ctbList[i].getSentence());
+			System.out.println();
+		}
 	}
 }
