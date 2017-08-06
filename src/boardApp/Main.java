@@ -3,7 +3,7 @@ package boardApp;
 import java.util.Scanner;
 
 /**
- * 掲示板への投稿(contribution)や投稿内容の掲示板への出力を実行するクラス
+ * 掲示板への投稿や投稿内容の掲示板への出力を実行するクラス
  * 
  * @author guest
  */
@@ -29,14 +29,14 @@ public class Main {
 
 		// 投稿情報オブジェクトを格納する配列
 		// 当課題では3件のみ投稿を受け付けるので、配列の長さは3とする
-		Contribution[] ctbList = new Contribution[3];
+		ContributionInfo[] ciList = new ContributionInfo[3];
 
 		// 投稿処理(3件)
 		for (int i = 0; i < 3; i++) {
-			ctbList[i] = readInput(scanner, userName);
+			ciList[i] = readInput(scanner, userName);
 		}
 		// 掲示板生成処理
-		createBoard(ctbList);
+		createBoard(ciList);
 
 		scanner.close();
 	}
@@ -66,39 +66,39 @@ public class Main {
 	 *            スキャナーオブジェクト
 	 * @param userName
 	 *            ユーザー名
-	 * @return contribution 投稿内容を保持したオブジェクト
+	 * @return contributionInfo 投稿内容を保持したオブジェクト
 	 */
-	private static Contribution readInput(Scanner sc, String userName) {
+	private static ContributionInfo readInput(Scanner sc, String userName) {
 		// 投稿文の入力
 		System.out.println("投稿を書き込んでください。");
 		System.out.print("投稿内容 > ");
 		 String sentence = sc.nextLine();
 
 		// 投稿情報インスタンスの生成
-		Contribution contribution = new Contribution(userName, sentence);
+		ContributionInfo contributionInfo = new ContributionInfo(userName, sentence);
 
-		return contribution;
+		return contributionInfo;
 	}
 
 	/**
 	 * 掲示板を生成し、投稿された内容を掲示板に表示する
 	 * 
-	 * @param ctbList
+	 * @param ciList
 	 *            投稿情報オブジェクトの配列
 	 */
-	private static void createBoard(Contribution[] ctbList) {
+	private static void createBoard(ContributionInfo[] ciList) {
 		// タイトル部分の表示
 		System.out.println();
 		System.out.println("------------------------------");
 		System.out.println();
 		System.out.println("********************");
-		System.out.println("第二回課題" + Contribution.TITLE);
+		System.out.println("第二回課題" + ContributionInfo.TITLE);
 		System.out.println("********************");
 
 		// 投稿内容部分の表示
-		for (int i = 0; i < ctbList.length; i++) {
-			System.out.println((i + 1) + ". " + ctbList[i].getUserName());
-			System.out.println(ctbList[i].getSentence());
+		for (int i = 0; i < ciList.length; i++) {
+			System.out.println((i + 1) + ". " + ciList[i].getUserName());
+			System.out.println(ciList[i].getSentence());
 			System.out.println();
 		}
 	}

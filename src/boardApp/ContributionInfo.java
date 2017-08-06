@@ -1,11 +1,12 @@
 package boardApp;
 
-public class Contribution {
-	/**
-	 * Œf¦”Â‚ÌŠe‹@”\‚ğÀ‘•‚µ‚½ƒNƒ‰ƒX
-	 * 
-	 * @author guest
-	 */
+/**
+ * Œf¦”Â‚ÌŠe‹@”\‚ğÀ‘•‚µ‚½ƒNƒ‰ƒX
+ * 
+ * @author guest
+ */
+
+public class ContributionInfo {
 	public static String TITLE = "Œf¦”Â";
 	private final String userName; // “ŠeÒ
 	private String sentence; // “Še•¶
@@ -16,7 +17,7 @@ public class Contribution {
 	 * @param userName “ŠeÒ
 	 * @param sentence “Še•¶
 	 */
-	public Contribution(String userName, String sentence) {
+	public ContributionInfo(String userName, String sentence) {
 		super();
 		this.userName = userName;
 		this.sentence = sentence;
