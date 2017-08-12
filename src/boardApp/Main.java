@@ -22,10 +22,6 @@ public class Main {
 		// ユーザー名を取得する
 		String userName = requestUserInfo();
 
-		// 投稿文を格納する配列
-		// 当課題では3件のみ投稿を受け付けるので、配列の長さは3とする
-		String[] sentenceList = new String[3];
-
 		// 投稿情報オブジェクトを格納する配列
 		// 当課題では3件のみ投稿を受け付けるので、配列の長さは3とする
 		ContributionInfo[] ciList = new ContributionInfo[3];
@@ -34,13 +30,11 @@ public class Main {
 		// 投稿文を取得し、投稿情報インスタンスを作成する。
 		// 作成したインスタンスは、投稿情報配列に保持しておく。
 		for (int i = 0; i < 3; i++) {
-			sentenceList[i] = requestContribution();
+			String sentence = requestContribution();
 			// 投稿情報インスタンスの生成
-			ContributionInfo contributionInfo = new ContributionInfo(userName, sentenceList[i]);
+			ContributionInfo contributionInfo = new ContributionInfo(userName, sentence);
 			ciList[i] = contributionInfo;
 		}
-		
-
 		// 掲示板生成処理
 		showBoard(ciList);
 
