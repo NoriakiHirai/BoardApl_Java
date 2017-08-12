@@ -45,6 +45,7 @@ public class Main {
 			ciList[i] = contributionInfo;
 		}
 
+		///// 掲示板の表示 /////
 		// タイトル部分の表示
 		System.out.println();
 		System.out.println("------------------------------");
