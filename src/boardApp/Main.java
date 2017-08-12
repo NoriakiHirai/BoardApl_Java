@@ -17,26 +17,32 @@ public class Main {
 	 *            実行時引数。無視される。
 	 */
 	public static void main(String[] args) {
-		// スキャナーオブジェクトの生成を行う。
-		// 一度InputStreamをcloseすると、再度openするのは無理っぽい。
-		// そのため、各メソッドでscannerオブジェクトを作成し、InputStreamの
-		// open/closeを行うのではなく、最初にscannerオブジェクトを作成し、
-		// それを引き回して、mainメソッドの最後にcloseさせる。
 		scanner = new Scanner(System.in);
 
 		// ユーザー名を取得する
-		String userName = boardInit(scanner);
+		String userName = requestUserInfo();
+
+		// 投稿文を格納する配列
+		// 当課題では3件のみ投稿を受け付けるので、配列の長さは3とする
+		String[] sentenceList = new String[3];
 
 		// 投稿情報オブジェクトを格納する配列
 		// 当課題では3件のみ投稿を受け付けるので、配列の長さは3とする
 		ContributionInfo[] ciList = new ContributionInfo[3];
 
 		// 投稿処理(3件)
+		// 投稿文を取得し、投稿情報インスタンスを作成する。
+		// 作成したインスタンスは、投稿情報配列に保持しておく。
 		for (int i = 0; i < 3; i++) {
-			ciList[i] = readInput(scanner, userName);
+			sentenceList[i] = requestContribution();
+			// 投稿情報インスタンスの生成
+			ContributionInfo contributionInfo = new ContributionInfo(userName, sentenceList[i]);
+			ciList[i] = contributionInfo;
 		}
+		
+
 		// 掲示板生成処理
-		createBoard(ciList);
+		showBoard(ciList);
 
 		scanner.close();
 	}
@@ -48,13 +54,13 @@ public class Main {
 	 *            スキャナーオブジェクト
 	 * @return userName ユーザー名
 	 */
-	private static String boardInit(Scanner sc) {
+	private static String requestUserInfo() {
 		System.out.println("*** 第二回課題掲示板へようこそ ***");
 
 		// ユーザー名の入力
 		System.out.println("ユーザー名を入力してください。");
 		System.out.print("ユーザー名:");
-		String userName = sc.nextLine();
+		String userName = scanner.nextLine();
 
 		return userName;
 	}
@@ -62,22 +68,15 @@ public class Main {
 	/**
 	 * 掲示板への投稿をコンソールから入力させる
 	 * 
-	 * @param sc
-	 *            スキャナーオブジェクト
-	 * @param userName
-	 *            ユーザー名
-	 * @return contributionInfo 投稿内容を保持したオブジェクト
+	 * @return sentence 投稿文
 	 */
-	private static ContributionInfo readInput(Scanner sc, String userName) {
+	private static String requestContribution() {
 		// 投稿文の入力
 		System.out.println("投稿を書き込んでください。");
 		System.out.print("投稿内容 > ");
-		 String sentence = sc.nextLine();
+		String sentence = scanner.nextLine();
 
-		// 投稿情報インスタンスの生成
-		ContributionInfo contributionInfo = new ContributionInfo(userName, sentence);
-
-		return contributionInfo;
+		return sentence;
 	}
 
 	/**
@@ -86,7 +85,7 @@ public class Main {
 	 * @param ciList
 	 *            投稿情報オブジェクトの配列
 	 */
-	private static void createBoard(ContributionInfo[] ciList) {
+	private static void showBoard(ContributionInfo[] ciList) {
 		// タイトル部分の表示
 		System.out.println();
 		System.out.println("------------------------------");
