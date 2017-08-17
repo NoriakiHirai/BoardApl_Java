@@ -9,8 +9,6 @@ import java.util.Scanner;
  */
 public class Main {
 
-	private static Scanner scanner;
-
 	/**
 	 * 掲示板への投稿、およびその出力に関する処理の制御を行う。
 	 * 
@@ -18,7 +16,7 @@ public class Main {
 	 *            実行時引数。無視される。
 	 */
 	public static void main(String[] args) {
-		scanner = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in);
 
 		System.out.println("*** 第二回課題掲示板へようこそ ***");
 
